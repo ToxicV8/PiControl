@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,7 +34,23 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Command.h" />
+		<Unit filename="include/CommandSystem.h" />
+		<Unit filename="include/Helpers.h" />
+		<Unit filename="include/Includes.h" />
+		<Unit filename="include/Logger.h" />
+		<Unit filename="include/Starter.h" />
+		<Unit filename="include/Structs.h" />
+		<Unit filename="include/ThreadManager.h" />
+		<Unit filename="include/Typedefs.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Command.cpp" />
+		<Unit filename="src/CommandSystem.cpp" />
+		<Unit filename="src/Helpers.cpp" />
+		<Unit filename="src/Logger.cpp" />
+		<Unit filename="src/Pointers.cpp" />
+		<Unit filename="src/Starter.cpp" />
+		<Unit filename="src/ThreadManager.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
