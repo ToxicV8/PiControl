@@ -17,6 +17,8 @@
 #include "Helpers.h"
 #include "Command.h"
 #include "CommandSystem.h"
+#include "GPIOControl.h"
+#include "CallbackCommands.h"
 #include "ThreadManager.h"
 #include "Starter.h"
 

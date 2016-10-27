@@ -6,3 +6,5 @@ Logger* g_pLogger = new Logger;
 ThreadManager* g_pThreadManager = new ThreadManager;
 Helpers* g_pHelpers = new Helpers;
 CommandSystem* g_pCommandSystem = new CommandSystem;
+CallbackCommands* g_pCallbackCommands = new CallbackCommands;
+GPIOControl* g_pGpioControl = new GPIOControl;

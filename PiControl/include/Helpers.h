@@ -7,6 +7,7 @@ class Helpers
     public:
         Helpers();
         void split(const std::string &s, char delim, std::vector<std::string> &elems);
+        bool stringToBool(std::string str);
         virtual ~Helpers();
     protected:
     private:

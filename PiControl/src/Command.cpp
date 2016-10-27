@@ -8,6 +8,14 @@ Command::Command(std::string cmd_name, void* valptr, int datatype)
     this->datatype = datatype;
 }
 
+Command::Command(std::string cmd_name, CallbackFunction callbackcmd)
+{
+
+    this->m_sCommandName = cmd_name;
+    this->funct = callbackcmd;
+    this->datatype = TYPE_CALLBACK;
+}
+
 int Command::getDataType()
 {
     return datatype;
@@ -45,8 +53,7 @@ void Command::Handle(std::string input)
 
 	if (datatype == TYPE_CALLBACK)
 	{
-        //CallbackFunction func = static_cast<CallbackFunction>(valueptr);
-		((CallbackFunction)valueptr)(input.c_str());
+		funct(input);
 	}
 
 	if (datatype == TYPE_FLOAT)

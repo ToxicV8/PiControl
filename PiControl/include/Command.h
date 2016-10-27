@@ -7,6 +7,7 @@ class Command
     public:
         //ctors
         Command(std::string cmd_name, void* valptr, int datatype);
+        Command(std::string cmd_name, CallbackFunction func);
 
         // Getters
         std::string getName();
@@ -21,6 +22,7 @@ class Command
     private:
         void* valueptr;
         int datatype;
+        CallbackFunction funct;
         std::string m_sCommandName;
 };
 
