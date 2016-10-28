@@ -77,9 +77,6 @@ void getpin(std::string args)
 
     if(arguments.size() > 0)
     {
-
-        g_pLogger->Log("Test: %s", g_pVariables->vars["testvar"]->s.c_str());
-
         int pin = atoi(arguments.at(0).c_str());
 
         bool value = g_pGpioControl->GetPinValue(pin);

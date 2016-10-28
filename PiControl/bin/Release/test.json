@@ -1,5 +1,5 @@
 {
-   "Times" : 10,
+   "Times" : 3,
    "Commands" : 
    ["getpin 2", "wait 1000", "setpin 2 1", "getpin 2", "setpin 2 0"]
 }

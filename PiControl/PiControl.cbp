@@ -29,6 +29,7 @@
 				<Linker>
 					<Add option="-s" />
 					<Add option="-lwiringPi" />
+					<Add option="-lreadline" />
 				</Linker>
 			</Target>
 		</Build>
@@ -42,21 +43,29 @@
 		<Unit filename="include/GPIOControl.h" />
 		<Unit filename="include/Helpers.h" />
 		<Unit filename="include/Includes.h" />
+		<Unit filename="include/JsonCommands.h" />
+		<Unit filename="include/JsonConfig.h" />
+		<Unit filename="include/JsonObject.h" />
 		<Unit filename="include/Logger.h" />
 		<Unit filename="include/Starter.h" />
 		<Unit filename="include/Structs.h" />
 		<Unit filename="include/ThreadManager.h" />
 		<Unit filename="include/Typedefs.h" />
+		<Unit filename="include/Variables.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/CallbackCommands.cpp" />
 		<Unit filename="src/Command.cpp" />
 		<Unit filename="src/CommandSystem.cpp" />
 		<Unit filename="src/GPIOControl.cpp" />
 		<Unit filename="src/Helpers.cpp" />
+		<Unit filename="src/JsonCommands.cpp" />
+		<Unit filename="src/JsonConfig.cpp" />
+		<Unit filename="src/JsonObject.cpp" />
 		<Unit filename="src/Logger.cpp" />
 		<Unit filename="src/Pointers.cpp" />
 		<Unit filename="src/Starter.cpp" />
 		<Unit filename="src/ThreadManager.cpp" />
+		<Unit filename="src/Variables.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
