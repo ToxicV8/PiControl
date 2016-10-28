@@ -1,14 +1,20 @@
 #include "Includes.h"
 
-
-void Handle()
+void History()
 {
-    while(true)
+    char *buf;
+
+    //rl_bind_key('\t',rl_abort);//disable auto-complete
+
+    while((buf = readline(">> "))!=NULL)
     {
-        std::string buf;
-        std::getline(std::cin, buf);
         g_pCommandSystem->HandleInput(buf);
+
+        if (buf[0]!=0)
+            add_history(buf);
     }
+
+    free(buf);
 }
 
 int main()
@@ -16,7 +22,7 @@ int main()
 
     g_pStarter->Start();
 
-    g_pThreadManager->RegisterThread(&Handle);
+    g_pThreadManager->RegisterThread(&History);
 
     g_pThreadManager->WaitForThreads();
 

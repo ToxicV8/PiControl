@@ -9,8 +9,13 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <unordered_map>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <chrono>
 
 /*Custom Includes*/
+#include "jsoncons/json.hpp"
 #include "Structs.h"
 #include "Logger.h"
 #include "Typedefs.h"
@@ -18,6 +23,10 @@
 #include "Command.h"
 #include "CommandSystem.h"
 #include "GPIOControl.h"
+#include "Variables.h"
+#include "JsonObject.h"
+#include "JsonCommands.h"
+#include "JsonConfig.h"
 #include "CallbackCommands.h"
 #include "ThreadManager.h"
 #include "Starter.h"

@@ -4,6 +4,7 @@
 enum DataType
 {
     TYPE_INTEGER,
+    TYPE_STRING,
     TYPE_BOOLEAN,
     TYPE_FLOAT,
     TYPE_CALLBACK

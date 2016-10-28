@@ -21,8 +21,6 @@ void GPIOControl::SetPinValue(int pin, bool value)
 
 bool GPIOControl::GetPinValue(int pin)
 {
-    //pinMode(pin, INPUT);
-
     return digitalRead(pin);
 }
 

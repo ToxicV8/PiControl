@@ -7,10 +7,10 @@ Helpers::Helpers()
 
 bool Helpers::stringToBool(std::string str)
 {
-    if(str == "on" || str == "1" || str == "true")
+    if(str == "on" || str == "1" || str == "true" || str == "high")
         return true;
 
-    if(str == "off" || str == "0" || str == "false")
+    if(str == "off" || str == "0" || str == "false" || str == "low")
         return false;
 
     return false;

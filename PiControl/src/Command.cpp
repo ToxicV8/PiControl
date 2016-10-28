@@ -51,6 +51,16 @@ void Command::Handle(std::string input)
 		g_pLogger->Log("%s is now %i", getName().c_str(), *pInt);
 	}
 
+    if(datatype == TYPE_STRING)
+    {
+        std::string* pString = static_cast<std::string*>(valueptr);
+
+        *pString = input;
+
+        g_pLogger->Log("Set %s to %s", getName().c_str(), pString->c_str());
+
+    }
+
 	if (datatype == TYPE_CALLBACK)
 	{
 		funct(input);

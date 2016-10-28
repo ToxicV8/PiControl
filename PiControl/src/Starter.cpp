@@ -12,6 +12,8 @@ void Starter::Start()
 
     g_pGpioControl->Setup();
 
+    g_pVariables->AddVar("testvar", std::string("test"));
+
     g_pCallbackCommands->RegisterCommands();
 
 }

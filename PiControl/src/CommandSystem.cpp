@@ -55,6 +55,11 @@ void CommandSystem::HandleInput(std::string input)
                     g_pLogger->Log("%s: %i", cmd->getName().c_str(), *static_cast<int*>(cmd->getValuePointer()));
                 }
 
+                if (cmd->getDataType() == TYPE_STRING)
+                {
+                    g_pLogger->Log("%s: %s", cmd->getName().c_str(), static_cast<std::string*>(cmd->getValuePointer())->c_str());
+                }
+
                 if (cmd->getDataType() == TYPE_FLOAT)
                 {
                     g_pLogger->Log("%s: %f", cmd->getName().c_str(), *static_cast<float*>(cmd->getValuePointer()));
