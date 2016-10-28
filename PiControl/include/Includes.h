@@ -13,13 +13,16 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <chrono>
+#include <exception>
+#include <tgbot/tgbot.h>
 
 /*Custom Includes*/
 #include "jsoncons/json.hpp"
 #include "Structs.h"
-#include "Logger.h"
 #include "Typedefs.h"
 #include "Helpers.h"
+#include "TelegramManager.h"
+#include "Logger.h"
 #include "Command.h"
 #include "CommandSystem.h"
 #include "GPIOControl.h"

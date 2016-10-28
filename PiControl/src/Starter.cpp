@@ -12,9 +12,15 @@ void Starter::Start()
 
     g_pGpioControl->Setup();
 
-    g_pVariables->AddVar("testvar", std::string("test"));
+    g_pVariables->AddVar("telegram_token", std::string("EMPTY"));
 
     g_pCallbackCommands->RegisterCommands();
+
+    g_pCommandSystem->HandleInput("loadconfig default.json");
+
+    g_pTelegramManager = new TelegramManager;
+
+    g_pTelegramManager->StartAsyncSendRecv();
 
 }
 

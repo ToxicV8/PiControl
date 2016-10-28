@@ -30,6 +30,10 @@
 					<Add option="-s" />
 					<Add option="-lwiringPi" />
 					<Add option="-lreadline" />
+					<Add option="-lTgBot" />
+					<Add option="-lboost_system" />
+					<Add option="-lcrypto" />
+					<Add option="-lssl" />
 				</Linker>
 			</Target>
 		</Build>
@@ -49,6 +53,7 @@
 		<Unit filename="include/Logger.h" />
 		<Unit filename="include/Starter.h" />
 		<Unit filename="include/Structs.h" />
+		<Unit filename="include/TelegramManager.h" />
 		<Unit filename="include/ThreadManager.h" />
 		<Unit filename="include/Typedefs.h" />
 		<Unit filename="include/Variables.h" />
@@ -64,6 +69,7 @@
 		<Unit filename="src/Logger.cpp" />
 		<Unit filename="src/Pointers.cpp" />
 		<Unit filename="src/Starter.cpp" />
+		<Unit filename="src/TelegramManager.cpp" />
 		<Unit filename="src/ThreadManager.cpp" />
 		<Unit filename="src/Variables.cpp" />
 		<Extensions>
