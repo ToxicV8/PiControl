@@ -23,6 +23,7 @@
 					<Add option="-lboost_system" />
 					<Add option="-lcrypto" />
 					<Add option="-lssl" />
+					<Add option="-lpthread" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -31,7 +32,8 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-O2" />
+					<Add option="-O3" />
+					<Add option="-std=c++11" />
 					<Add option="-lwiringPi" />
 					<Add directory="include" />
 				</Compiler>
@@ -43,6 +45,7 @@
 					<Add option="-lboost_system" />
 					<Add option="-lcrypto" />
 					<Add option="-lssl" />
+					<Add option="-lpthread" />
 				</Linker>
 			</Target>
 		</Build>
@@ -50,6 +53,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Linker>
+			<Add option="-lwiringPi" />
+			<Add option="-lreadline" />
+			<Add option="-lTgBot" />
+			<Add option="-lboost_system" />
+			<Add option="-lcrypto" />
+			<Add option="-lssl" />
+		</Linker>
 		<Unit filename="include/CallbackCommands.h" />
 		<Unit filename="include/Command.h" />
 		<Unit filename="include/CommandSystem.h" />
