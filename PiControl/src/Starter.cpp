@@ -5,6 +5,10 @@ Starter::Starter()
 
 }
 
+void Async()
+{
+    g_pTelegramManager->StartAsyncSendRecv();
+}
 
 void Starter::Start()
 {
@@ -14,13 +18,16 @@ void Starter::Start()
 
     g_pVariables->AddVar("telegram_token", std::string("EMPTY"));
 
+    g_pVariables->AddVar("telegram_owner_id", 0);
+
     g_pCallbackCommands->RegisterCommands();
 
     g_pCommandSystem->HandleInput("loadconfig default.json");
 
     g_pTelegramManager = new TelegramManager;
 
-    g_pTelegramManager->StartAsyncSendRecv();
+    g_pThreadManager->RegisterThread(&Async);
+        //g_pTelegramManager->StartAsyncSendRecv();
 
 }
 

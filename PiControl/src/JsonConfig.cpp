@@ -47,7 +47,7 @@ void JsonConfig::Execute(std::string filename)
 
             if(got != g_pVariables->vars.end())
             {
-                g_pLogger->Log("%s", a.name().c_str());
+                //g_pLogger->Log("%s", a.name().c_str());
 
                 Var* v = g_pVariables->vars[a.name()];
 
@@ -68,6 +68,7 @@ void JsonConfig::Execute(std::string filename)
                 }
             }
         }
+        g_pLogger->Log("Load JSON Config %s successfully.", filename.c_str());
     }
 }
 
