@@ -95,4 +95,5 @@ void Command::Handle(std::string input)
 Command::~Command()
 {
     //dtor
+    //delete valueptr;
 }

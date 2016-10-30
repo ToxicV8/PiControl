@@ -64,4 +64,5 @@ void TelegramManager::SendToAllChats(std::string message)
 TelegramManager::~TelegramManager()
 {
     //dtor
+    delete g_pBot;
 }

@@ -61,6 +61,7 @@
 			<Add option="-lcrypto" />
 			<Add option="-lssl" />
 		</Linker>
+		<Unit filename="include/ButtonGame.h" />
 		<Unit filename="include/CallbackCommands.h" />
 		<Unit filename="include/Command.h" />
 		<Unit filename="include/CommandSystem.h" />
@@ -78,6 +79,7 @@
 		<Unit filename="include/Typedefs.h" />
 		<Unit filename="include/Variables.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/ButtonGame.cpp" />
 		<Unit filename="src/CallbackCommands.cpp" />
 		<Unit filename="src/Command.cpp" />
 		<Unit filename="src/CommandSystem.cpp" />

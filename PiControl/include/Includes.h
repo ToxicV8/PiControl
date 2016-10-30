@@ -9,10 +9,12 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <cctype>
 #include <unordered_map>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <chrono>
+#include <random>
 #include <exception>
 #include <tgbot/tgbot.h>
 
@@ -30,6 +32,7 @@
 #include "JsonObject.h"
 #include "JsonCommands.h"
 #include "JsonConfig.h"
+#include "ButtonGame.h"
 #include "CallbackCommands.h"
 #include "ThreadManager.h"
 #include "Starter.h"
