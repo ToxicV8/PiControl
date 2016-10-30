@@ -17,32 +17,32 @@ void GPIOControl::SetPullUpDown(int pin, int value)
 
 void GPIOControl::TogglePin(int pin)
 {
-    if(g_pGpioControl->GetPinValue(pin)){
+    if(g_pGpioControl->GetPinValue(pin))
+    {
         g_pGpioControl->SetPinValue(pin, false);
-    }else{
+    }
+    else
+    {
         g_pGpioControl->SetPinValue(pin, true);
     }
 }
 
 void GPIOControl::HandlerThread()
 {
+    bool state = false;
     while(true)
     {
+
         for(auto p : handlers)
         {
-            int pin = p.first;
-
-            ToggleHandler handler = p.second;
-
-            bool state = digitalRead(p.first);
-
-            if(state != states[pin])
+            state = digitalRead(p.first);
+            if(state != states[p.first])
             {
-                states[pin] = state;
-                handler(state);
+                states[p.first] = state;
+                p.second(state);
             }
         }
-        delay(20);
+        delay(1);
     }
 }
 

@@ -46,8 +46,28 @@ void TelegramManager::StartAsyncSendRecv()
 
 }
 
+void sendAsync(std::string msg)
+{
+    try
+    {
+        if(g_pBot && g_bConnected && g_pVariables->vars["telegram_owner_id"]->i != 0)
+        {
+            g_pBot->getApi().sendMessage(g_pVariables->vars["telegram_owner_id"]->i, msg);
+        }
+    }
+    catch(TgBot::TgException& e)
+    {
+        g_pLogger->Log("Error while sending Message: %s", e.what());
+    }
+}
+
+
 void TelegramManager::SendToAllChats(std::string message)
 {
+    /*
+    g_pThreadManager->RegisterThread(&sendAsync, message);
+    */
+
     try
     {
         if(g_pBot && g_bConnected && g_pVariables->vars["telegram_owner_id"]->i != 0)

@@ -5,59 +5,58 @@ ButtonGame::ButtonGame()
     //ctor
 }
 
-void Player2ButtonDown(bool state)
+void Player2ButtonDown(void)
 {
-    if(!state)
-        g_pButtonGame->OnClick(g_pVariables->vars["player2_pin"]->i);
-}
-
-void ButtonGame::OnClick(int pin)
-{
-    if(m_bLedOn && !m_bWinner)
+    if(g_pButtonGame->m_bLedOn && !g_pButtonGame->m_bWinner)
     {
-        if(pin == g_pVariables->vars["player2_pin"]->i)
-        {
-            g_pLogger->Log("%s won the Round", m_sPlayer2.c_str());
-            m_vStats[g_pButtonGame->m_sPlayer2].RoundsWon++;
-        }
-        else if(pin == g_pVariables->vars["player1_pin"]->i)
-        {
-            g_pLogger->Log("%s won the Round", m_sPlayer1.c_str());
-            m_vStats[g_pButtonGame->m_sPlayer1].RoundsWon++;
-        }
-        m_bInRound = false;
-        m_bWinner = true;
-    }else if(m_bInRound && !m_bWinner){
+        g_pButtonGame->m_bWinner = true;
+        g_pButtonGame->m_bInRound = false;
+        g_pLogger->Log("%s won the Round", g_pButtonGame->m_sPlayer2.c_str());
+        g_pButtonGame->m_vStats[g_pButtonGame->m_sPlayer2].RoundsWon++;
 
-        if(pin == g_pVariables->vars["player2_pin"]->i)
-        {
-            g_pLogger->Log("%s Pressed before Light was on! %s won the Round", m_sPlayer2.c_str(), m_sPlayer1.c_str());
-            m_vStats[g_pButtonGame->m_sPlayer1].RoundsWon++;
-        }
-        else if(pin == g_pVariables->vars["player1_pin"]->i)
-        {
-            g_pLogger->Log("%s Pressed before Light was on! %s won the Round", m_sPlayer1.c_str(), m_sPlayer2.c_str());
+    }
+    else if(g_pButtonGame->m_bInRound && !g_pButtonGame->m_bWinner)
+    {
+        g_pButtonGame->m_bWinner = true;
+        g_pButtonGame->m_bInRound = false;
 
-            m_vStats[g_pButtonGame->m_sPlayer2].RoundsWon++;
-        }
-        m_bInRound = false;
-        m_bWinner = true;
+        g_pLogger->Log("%s Pressed before Light was on! %s won the Round", g_pButtonGame->m_sPlayer2.c_str(), g_pButtonGame->m_sPlayer1.c_str());
+        g_pButtonGame->m_vStats[g_pButtonGame->m_sPlayer1].RoundsWon++;
+
     }
 }
 
-void Player1ButtonDown(bool state)
+
+void Player1ButtonDown(void)
 {
-    if(!state)
-        g_pButtonGame->OnClick(g_pVariables->vars["player1_pin"]->i);
+    if(g_pButtonGame->m_bLedOn && !g_pButtonGame->m_bWinner)
+    {
+        g_pButtonGame->m_bWinner = true;
+        g_pButtonGame->m_bInRound = false;
+
+        g_pLogger->Log("%s won the Round", g_pButtonGame->m_sPlayer1.c_str());
+        g_pButtonGame->m_vStats[g_pButtonGame->m_sPlayer1].RoundsWon++;
+    }
+    else if(g_pButtonGame->m_bInRound && !g_pButtonGame->m_bWinner)
+    {
+        g_pButtonGame->m_bWinner = true;
+        g_pButtonGame->m_bInRound = false;
+
+        g_pLogger->Log("%s Pressed before Light was on! %s won the Round", g_pButtonGame->m_sPlayer1.c_str(), g_pButtonGame->m_sPlayer2.c_str());
+        g_pButtonGame->m_vStats[g_pButtonGame->m_sPlayer2].RoundsWon++;
+    }
 }
+
 
 void ButtonGame::Setup()
 {
     g_pGpioControl->SetPullUpDown(g_pVariables->vars["player1_pin"]->i, PUD_UP);
+
     g_pGpioControl->SetPullUpDown(g_pVariables->vars["player2_pin"]->i, PUD_UP);
 
-    g_pGpioControl->RegisterToggleHandler(g_pVariables->vars["player1_pin"]->i, &Player1ButtonDown);
-    g_pGpioControl->RegisterToggleHandler(g_pVariables->vars["player2_pin"]->i, &Player2ButtonDown);
+    wiringPiISR(g_pVariables->vars["player1_pin"]->i, INT_EDGE_FALLING, &Player1ButtonDown);
+
+    wiringPiISR(g_pVariables->vars["player2_pin"]->i, INT_EDGE_FALLING, &Player2ButtonDown);
 
     this->m_bSetup = true;
 }
@@ -65,10 +64,7 @@ void ButtonGame::Setup()
 void ButtonGame::DisplayStats(std::string player)
 {
 
-    g_pLogger->Log("%s Stats: %s %s", std::string("-------------").c_str(), player.c_str(), std::string("---------").c_str());
-    g_pLogger->Log("RoundsWon: %i", m_vStats[player].RoundsWon);
-    g_pLogger->Log("TotalWins: %i", m_vStats[player].TotalWins);
-    g_pLogger->Log("Games: %i", m_vStats[player].Games);
+    g_pLogger->Log("------------- Stats: %s -------------\nRoundsWon: %i\nTotalWins: %i\nGames: %i", player.c_str(), m_vStats[player].RoundsWon, m_vStats[player].TotalWins, m_vStats[player].Games);
 }
 
 int RandU(int nMin, int nMax)
@@ -77,7 +73,6 @@ int RandU(int nMin, int nMax)
     std::mt19937 gn(rd());
     std::uniform_int_distribution<int> gen(nMin, nMax); // uniform, unbiased
     return gen(gn);
-    //return nMin + (int)((double)rand() / (RAND_MAX+1) * (nMax-nMin+1));
 }
 
 void Wait(int seconds)
@@ -97,12 +92,11 @@ void Wait(int seconds)
     g_pLogger->Log("Go!");
 }
 
-void RunGame()
+PI_THREAD(Run)
 {
     while(g_pButtonGame->m_bGameRunning == true)
     {
-        delay(30);
-
+        delay(0.5);
         if(g_pButtonGame->m_bWinner == true)
         {
             g_pButtonGame->m_bLedOn = false;
@@ -118,19 +112,22 @@ void RunGame()
 
             g_pButtonGame->m_iRound++;
 
-            Wait(5);
+            Wait(3);
 
             g_pButtonGame->m_bInRound = true;
+
             g_pGpioControl->SetPinValue(g_pVariables->vars["led_pin"]->i, LOW);
 
-            delay(RandU(5, 20)* 1000);
+            delay(RandU(1, 6) * 1000);
 
             g_pGpioControl->SetPinValue(g_pVariables->vars["led_pin"]->i, HIGH);
 
             g_pButtonGame->m_bLedOn = true;
         }
     }
+
 }
+
 
 void ButtonGame::StartNewGame(int rounds, std::string player1, std::string player2)
 {
@@ -167,8 +164,8 @@ void ButtonGame::StartNewGame(int rounds, std::string player1, std::string playe
     m_vStats[m_sPlayer2].Games++;
 
     g_pGpioControl->SetPinValue(g_pVariables->vars["led_pin"]->i, LOW);
-
-    g_pThreadManager->RegisterThread(&RunGame);
+    piThreadCreate(Run);
+    //g_pThreadManager->RegisterThread(&RunGame);
 }
 
 void ButtonGame::EndGame()
@@ -188,11 +185,10 @@ void ButtonGame::EndGame()
     if(m_vStats[m_sPlayer2].RoundsWon == m_vStats[m_sPlayer1].RoundsWon)
         Draw = true;
 
-    m_vStats[winner].TotalWins++;
+    if(!Draw)
+        m_vStats[winner].TotalWins++;
 
     g_pLogger->Log("The Winner is....");
-
-    delay(1000);
 
     g_pLogger->Log( "%s", Draw ? "Draw!" : (winner + "!").c_str());
 

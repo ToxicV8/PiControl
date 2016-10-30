@@ -7,8 +7,9 @@ ThreadManager::ThreadManager()
 
 void ThreadManager::WaitForThreads()
 {
-    for(auto & thr : threads)
+    for(auto& thr : threads)
     {
+        //pthread_join(thr);
         thr.join();
     }
 }

@@ -9,8 +9,10 @@ class TelegramManager
         void StartAsyncSendRecv();
         void SendToAllChats(std::string message);
         virtual ~TelegramManager();
+        std::string m_sMsg;
     protected:
     private:
+
 };
 extern bool g_bConnected;
 extern TgBot::Bot* g_pBot;
