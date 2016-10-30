@@ -16,7 +16,8 @@ void TelegramManager::StartAsyncSendRecv()
 
         lbot.getEvents().onAnyMessage([&lbot](TgBot::Message::Ptr message)
         {
-            g_pCommandSystem->HandleInput(message->text);
+            if(message->chat->id == g_pVariables->vars["telegram_owner_id"]->i)
+                g_pCommandSystem->HandleInput(message->text);
         });
 
         g_bConnected = true;
