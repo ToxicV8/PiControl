@@ -10,7 +10,7 @@ class Starter
     protected:
     private:
     const int m_pVersion[3] = {1, 0, 1};
-    const char* m_szCoder = "Lasertrap";
+    const char* m_szCoder = "Julian Kunzelmann";
 };
 
 extern Starter* g_pStarter;
