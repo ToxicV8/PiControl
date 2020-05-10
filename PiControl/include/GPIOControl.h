@@ -16,8 +16,8 @@ class GPIOControl
         virtual ~GPIOControl();
     protected:
     private:
-    std::unordered_map<int, bool> states;
-    std::unordered_map<int, ToggleHandler> handlers;
+        std::unordered_map<int, bool> states;
+        std::unordered_map<int, ToggleHandler> handlers;
 };
 extern GPIOControl* g_pGpioControl;
 #endif // GPIOCONTROL_H
