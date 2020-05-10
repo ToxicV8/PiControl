@@ -13,7 +13,6 @@ class Stats
         int RoundsWon;
         int TotalWins;
         int Games;
-        //int AllTimeNeeded;
 };
 
 class ButtonGame
