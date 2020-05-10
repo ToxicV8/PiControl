@@ -9,8 +9,8 @@ class Starter
         virtual ~Starter();
     protected:
     private:
-    const int m_pVersion[3] = {1, 0, 1};
-    const char* m_szCoder = "Julian Kunzelmann";
+        const int m_pVersion[3] = {1, 0, 1};
+        const char* m_szCoder = "Julian Kunzelmann";
 };
 
 extern Starter* g_pStarter;
