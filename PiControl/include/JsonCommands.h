@@ -5,13 +5,9 @@
 class JsonCommands : public JsonObject
 {
     public:
-
         JsonCommands();
-
         void Execute(std::string filename);
-
         std::vector<std::string> getRequiredKeys();
-
         virtual ~JsonCommands();
     protected:
     private:
